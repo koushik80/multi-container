@@ -1,4 +1,4 @@
-# Multi-container
+# Multi-container [practice session]
 # React
 # Express
 # Postgres
