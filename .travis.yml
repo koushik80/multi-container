@@ -14,3 +14,10 @@ after_success:
   - docker build -t koushik80/multi-nginx ./nginx
   - docker build -t koushik80/multi-server ./server
   - docker build -t koushik80/multi-worker ./worker
+  # Login to the Docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images and push them to the docker hub
+  - docker push koushik80/multi-client
+  - docker push koushik80/multi-nginx
+  - docker push koushik80/multi-server
+  - docker push koushik80/multi-worker
