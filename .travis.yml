@@ -21,3 +21,15 @@ after_success:
   - docker push koushik80/multi-nginx
   - docker push koushik80/multi-server
   - docker push koushik80/multi-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-north-1"
+  app: "multi-container"
+  env: "Multicontainer-env"
+  bucket_name: "elasticbeanstalk-eu-north-1-669225622563"
+  bucket_path: "multi-container"
+  on:
+    branch: master
+  access_key_id: "$AWS_ACCESS_KEY"
+  secret_access_key: "$AWS_SECRET_KEY"
