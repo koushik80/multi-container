@@ -3,7 +3,8 @@
 # Express
 # Postgres
 # Docker
+# Kubernetes
 # Redis
 # Travis CI
-# Nginx
+# Nginx [dropped]
 # AWS
