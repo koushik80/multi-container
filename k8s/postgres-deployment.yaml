@@ -5,8 +5,8 @@ metadata:
 spec:
   replicas: 1
   selector:
-   matchLabels:
-     component: postgres
+    matchLabels:
+      component: postgres
   template:
     metadata:
       labels:
@@ -27,7 +27,7 @@ spec:
               subPath: postgres
           env:
             - name: POSTGRES_PASSWORD
-              valueForm:
+              valueFrom:
                 secretKeyRef:
                   name: pgpassword
                   key: PGPASSWORD
