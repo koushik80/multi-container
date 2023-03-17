@@ -1,8 +1,14 @@
 sudo: required
 services:
   - docker
+script:
+  - docker run -e CI=true koushik80/multi-container npm test
 before_install:
   - curl https://sdk.cloud.google.com | bash > /dev/null;
   - source $HOME/google-cloud-sdk/path.bash.inc
   - gcloud components update kubectl
   - gcloud auth activate-service-account --key-file service-account.json
+  - gcloud config set project skilful-berm-214833
+  - gcloud config set /compute/zone eu-north-1
+  - gcloud container clusters get-credentials multi-cluster
+  - -echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
