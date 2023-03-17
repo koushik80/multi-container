@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+
+kind: Certificate
+metadata:
+  name: mcontainer-com-tls
+spec:
+  secretName: mcontainer-com
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: mcontainer.com
+  dnsNames:
+    - macontainer.com
+    - www.macontainer.com
