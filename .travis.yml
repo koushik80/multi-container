@@ -1,8 +1,6 @@
 sudo: required
 services:
   - docker
-script:
-  - docker run -e CI=true koushik80/multi-container npm test
 before_install:
   - curl https://sdk.cloud.google.com | bash > /dev/null;
   - source $HOME/google-cloud-sdk/path.bash.inc
@@ -11,4 +9,14 @@ before_install:
   - gcloud config set project skilful-berm-214833
   - gcloud config set /compute/zone eu-north-1
   - gcloud container clusters get-credentials multi-cluster
-  - -echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker build -t koushik80/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true koushik80/react-test npm test
+
+deploy:
+  provider: script
+  script: bash ./deploy.sh
+  on:
+   branch: master
